@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from twill.commands import *
+import twill.commands
+from twill.utils import print_form
 import twill
 
 class Browser:
@@ -24,6 +25,50 @@ class Browser:
             sc = "Please provide the URL"
 
         return sc
+
+
+    def show_forms (self, url, filename="forms"):
+        
+        if url:
+            try:
+                self.commands.go(url)
+            except:
+                print "There is a problem with the URL"
+            forms  = self.commands.get_browser().get_all_forms()
+            stream = open(filename, 'w')
+
+            for i, form in enumerate(forms):
+                     print_form (i,form,stream)            
+        else:
+            sc = "Please provide the URL"
+            
+
+    def simple_login (self, url = None):
+
+        if url:
+            try:
+                self.commands.go(url)
+            except:
+                print "There is a problem with the URL"
+
+            #testing
+            self.commands.formclear('2')
+            self.commands.fv("2", "session_key", "")
+            self.commands.fv("2", "session_password", "")
+            self.commands.submit()
+          
+        else:
+             response = "Please provide the URL"
+
+        #return self.commands.get_browser()
+        #return self.commands.get_browser().get_url()
+        #return self.commands.get_browser().get_html()
+        #return self.commands.get_browser().get_title()
+        
+
+        
+
+    
 
 
 def main():
