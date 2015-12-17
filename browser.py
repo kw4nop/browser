@@ -9,7 +9,8 @@ class Browser:
     def __init__ (self, ua="robotina-ua", timeout=200):
 
         self.commands = twill.commands
-        self.commands.agent = ua
+        #self.commands.add_extra_header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; rv:10.0) Gecko/20100101 Firefox/10.0")
+        self.commands.add_extra_header("User-Agent", ua)
         self.commands.timeout = timeout
 
 
@@ -43,7 +44,7 @@ class Browser:
             sc = "Please provide the URL"
             
 
-    def simple_login (self, url = None):
+    def simple_login (self, url = None, form_number = None, field_name = None, field_password = None, value_name =None, value_password =None):
 
         if url:
             try:
@@ -51,25 +52,18 @@ class Browser:
             except:
                 print "There is a problem with the URL"
 
-            #testing
-            self.commands.formclear('2')
-            self.commands.fv("2", "session_key", "")
-            self.commands.fv("2", "session_password", "")
+            self.commands.formclear(form_number)
+            self.commands.fv(form_number, field_name, value_name)
+            self.commands.fv(form_number, field_password, value_password)
             self.commands.submit()
           
         else:
              response = "Please provide the URL"
 
-        #return self.commands.get_browser()
+        return self.commands.get_browser()
         #return self.commands.get_browser().get_url()
         #return self.commands.get_browser().get_html()
         #return self.commands.get_browser().get_title()
-        
-
-        
-
-    
-
 
 def main():
     print "."
