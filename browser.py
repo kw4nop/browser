@@ -9,7 +9,6 @@ class Browser:
     def __init__ (self, ua="robotina-ua", timeout=200):
 
         self.commands = twill.commands
-        #self.commands.add_extra_header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; rv:10.0) Gecko/20100101 Firefox/10.0")
         self.commands.add_extra_header("User-Agent", ua)
         self.commands.timeout = timeout
 
@@ -44,7 +43,8 @@ class Browser:
             sc = "Please provide the URL"
             
 
-    def simple_login (self, url = None, form_number = None, field_name = None, field_password = None, value_name =None, value_password =None):
+    def simple_login (self, url = None, form_number = None, field_name = None,
+                      field_password = None, value_name =None, value_password =None):
 
         if url:
             try:
